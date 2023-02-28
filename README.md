@@ -1,5 +1,5 @@
 # Pritunl Client Docker
-Pritunl Client inside of a Docker container
+Pritunl Client inside of a Docker container [![Build Status](https://drone.racz.group/api/badges/TomGlass/pritunl-client-docker/status.svg)](https://drone.racz.group/TomGlass/pritunl-client-docker)
 
 ### Usage
 The container will import the specified profile once you run it and start the connection.
