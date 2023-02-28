@@ -1,0 +1,32 @@
+---
+kind: pipeline
+name: default
+
+steps:
+- name: Build Pritunl Client
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run
+  environment:
+    USERNAME:
+      from_secret: reguser
+    PASSWORD:
+      from_secret: regpass
+  commands:
+  - sleep 5 # give docker enough time to start
+  - docker login dahlia-reg.racz.group -u $USERNAME -p $PASSWORD
+  - docker build -t dahlia-reg.racz.group/pritunl-docker:latest .
+  - docker push dahlia-reg.racz.group/pritunl-docker:latest
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+volumes:
+- name: dockersock
+  temp: {}
